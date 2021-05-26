@@ -1,0 +1,37 @@
+{% if activity %}
+    <h4>
+        {{__('Your activity idea for today', textdomain)}}: <strong>{{activity}}</strong>
+    </h4>
+{% endif %}
+
+<hr />
+
+<h4>
+    {{__('Please choose desired activity types', textdomain)}}
+</h4>
+<form action="{{ wpData.adminPostUrl }}" method="POST">
+    {% for type in allTypes %}
+        <input
+            type="checkbox"
+            name="activity_types[]"
+            id="activity_types_{{type}}"
+            value="{{type}}"
+            {% if userSelectedTypes and type in userSelectedTypes %}
+                checked="checked"
+            {% endif %}
+        />
+        <label
+            for="activity_types_{{type}}"
+        >
+            {{type}}
+        </label>
+        <br />
+    {% endfor %}
+
+    <br />
+
+    {{ nonceField(accountActivityTypesNonce) }}
+
+    <input type="hidden" name="action" value="wc_myaccount_save_activities" />
+    <button type="submit">{{__('Save your preferences', textdomain)}}</button>
+</form>

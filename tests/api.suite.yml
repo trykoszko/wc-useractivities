@@ -1,0 +1,27 @@
+modules:
+  enabled:
+    - WPDb # BEFORE the WPLoader one!
+    - WPLoader # AFTER the WPDb one!
+  config:
+    WPDb:
+      dsn: 'mysql:host=127.0.0.1;dbname=useractivities'
+      user: 'root'
+      password: 'root'
+      dump: 'tests/_data/test.sql'
+      populate: true
+      cleanup: true
+      waitlock: 10
+      url: 'https://useractivities.devlocal'
+      urlReplacement: true
+      tablePrefix: 'wp_'
+    WPLoader:
+      loadOnly: true
+      wpRootFolder: "/Users/Michal/Projects/useractivites"
+      dbName: "dbname"
+      dbHost: "127.0.0.1"
+      dbUser: "root"
+      dbPassword: "root"
+      domain: "useractivities.devlocal"
+      theme: storefront
+      plugins: ['woocommerce/woocommerce.php', 'wc-useractivities/wc-useractivities.php']
+      activatePlugins: ['woocommerce/woocommerce.php', 'wc-useractivities/wc-useractivities.php']
